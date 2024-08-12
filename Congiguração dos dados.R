@@ -1,6 +1,7 @@
 # Fontes:
 
 # 1 - https://rpubs.com/gabriel-assuncao-ibge/pns
+# 2 - https://github.com/sopeso/PNS2019-analise-desigualdade/blob/main/analise_R.R
 
 # Instala pacotes 
 loadpackages <- function(packages){
@@ -13,7 +14,7 @@ loadpackages <- function(packages){
 }
 
 # Pacotes necessários para análise e visualização
-loadpackages(c('PNSIBGE'))
+loadpackages(c('PNSIBGE', 'survey', 'tidyverse'))
   
 # Configurando o ambiente
 rm(list=ls())
@@ -25,7 +26,7 @@ options(message=FALSE, warning=FALSE) # exclui mensagens e alertas
   
 
 
-# Coleta os dados a partir do pacote PNSIBGE e salva na pasta indicada
+# Coleta os dados COMPLETOS a partir do pacote PNSIBGE e salva na pasta indicada
 dadosPNS_13 <- get_pns(year=2013, savedir = './dados_ibge/', selected = T) # design = T (padrão) / Morador selecionado
 dadosPNS_19 <- get_pns(year=2019, savedir = './dados_ibge/', selected = T) # design = T (padrão) / Morador selecionado
 

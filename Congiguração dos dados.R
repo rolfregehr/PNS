@@ -3,6 +3,9 @@
 # 1 - https://rpubs.com/gabriel-assuncao-ibge/pns
 # 2 - https://github.com/sopeso/PNS2019-analise-desigualdade/blob/main/analise_R.R
 
+
+rm(list=ls())
+
 # Instala pacotes 
 loadpackages <- function(packages){
   for(pkg in packages){
@@ -17,7 +20,6 @@ loadpackages <- function(packages){
 loadpackages(c('PNSIBGE', 'survey', 'tidyverse'))
   
 # Configurando o ambiente
-rm(list=ls())
 options(scipen=999) #exclui a notificação científica 
 options(dplyr.show_progress = F) # exclui info 
 options(dplyr.summarise.inform = FALSE) # exclui resumo

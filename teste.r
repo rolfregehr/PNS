@@ -112,3 +112,33 @@ class(temp)
 
 as_tibble(temp)
 labels(temp)
+
+
+labels(temp)[[1]][5]
+
+
+
+
+
+
+# Gráfico 
+
+media <- svyby(formula = ~M01501,
+      by =~Y008,
+      design = Orientacao_Sexual_vs_Rede_apoio,
+      FUN = svymean,
+      na.rm = T)
+
+df <- as.data.frame(media)
+
+df$lower <- df$`M01501Nenhum` - 1.96 * df$`se.M01501Nenhum`
+df$upper <- df$`M01501Nenhum` + 1.96 * df$`se.M01501Nenhum`
+
+
+
+ggplot(df, aes(x = Y008 , y = `M01501Nenhum`, fill = Y008 )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2, position = position_dodge(0.9)) +
+  labs(title = "API Scores by School Type", x = "School Type", y = "API Score") +
+  theme_minimal()
+

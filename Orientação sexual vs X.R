@@ -61,3 +61,5 @@ vs.UF <- as.data.frame(svyby(formula = ~V00201,
         strip.background = element_rect(fill="#00000003"))+
     coord_flip()
   
+  
+  

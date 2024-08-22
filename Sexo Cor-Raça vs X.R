@@ -35,10 +35,11 @@ ultima_consulta <- as.data.frame(svyby(formula = ~J01101,
                                     na.rm = T))
 
 
-ultima_consulta |> 
+graf_ultima_consulta <- ultima_consulta |> 
   mutate(superior = `J01101Até 1 ano` + 1.96*`se.J01101Até 1 ano`,
          inferior = `J01101Até 1 ano` - 1.96*`se.J01101Até 1 ano`,
          `Sexo biológico` = C006) |> 
+  filter(C009 != 'Ignorado') |> 
   ggplot(aes(x = J002 , y = `J01101Até 1 ano`, fill = `Sexo biológico`)) +
   scale_fill_manual(values=c('#486185', '#D89936'))+
   geom_bar(stat = "identity", position = "dodge") +
@@ -49,5 +50,22 @@ ultima_consulta |>
        x = 'Nas duas últimas semanas, deixou de realizar quaisquer de suas atividades habituais?',
        y = 'Proporção média')+
   theme(panel.background = element_blank(),
-        strip.background = element_rect(fill="#00000003"))
+        strip.background = element_rect(fill="#00000003"),
+        text = element_text(size=30))
 
+
+png('D:/OneDrive/_saudementaldohomem.com.br/blog/posts/011 - Homens têm mesmo nº de consulta que mulher/graf_ultima_consulta.png',
+    width = 1920, height = 1080, units = "px")
+
+graf_ultima_consulta
+
+dev.off()
+
+
+
+# Última consulta por sexo
+as.data.frame(svyby(formula = ~J01101,
+                    by =~C006+J002,
+                    design = dadosPNS_19,
+                    FUN = svymean,
+                    na.rm = T))
